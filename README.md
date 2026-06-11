@@ -39,20 +39,27 @@ git clone https://github.com/geoClink/code-quiz.git
 cd code-quiz
 ```
 
-### 2. Create and activate virtual environment
+### 2. Create virtual environment
 
 ```bash
 python3 -m venv venv
+```
+
+### 3. Activate virtual environment
+
+Always activate before running the script:
+
+```bash
 source venv/bin/activate
 ```
 
-### 3. Install dependencies
+### 4. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Add your API keys
+### 5. Add your API keys
 
 Create a `.env` file in the project root:
 
@@ -76,10 +83,25 @@ GROQ_API_KEY=your_groq_api_key_here
 - Click API Keys in the sidebar
 - Create a new key and copy it
 
-### 5. Run the quiz
+### 6. Run the quiz
 
 ```bash
 python3 quiz.py
+```
+
+### Optional: create a shortcut command
+
+Run this once to create a `quiz` command you can use from anywhere:
+
+```bash
+echo 'alias quiz="cd ~/code-quiz && source venv/bin/activate && python3 quiz.py"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+Then just type:
+
+```bash
+quiz
 ```
 
 ## Project roadmap
