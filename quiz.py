@@ -149,21 +149,39 @@ else:
     difficulty_instruction = "Ask intermediate questions focused on why decisions were made, what patterns are being used, and how components interact."
 
 print("\nSelect a topic to focus on (or press Enter for any topic):\n")
-print("1. Error handling")
-print("2. Data flow")
-print("3. API design")
-print("4. Authentication")
-print("5. Performance")
-print("6. Any topic\n")
+print("1.  Error handling")
+print("2.  Data flow")
+print("3.  API design")
+print("4.  Authentication")
+print("5.  Performance")
+print("6.  Database and queries")
+print("7.  State management")
+print("8.  Security")
+print("9.  Testing")
+print("10. Async and concurrency")
+print("11. Architecture and design patterns")
+print("12. UI and user experience")
+print("13. Third party integrations")
+print("14. Caching")
+print("15. Any topic\n")
 
-topic_choice = input("Enter 1-6 (or press Enter for any): ").strip()
+topic_choice = input("Enter 1-15 (or press Enter for any): ").strip()
 
 topics = {
     "1": "error handling",
     "2": "data flow",
     "3": "API design",
     "4": "authentication",
-    "5": "performance"
+    "5": "performance",
+    "6": "database design and queries",
+    "7": "state management",
+    "8": "security",
+    "9": "testing and test coverage",
+    "10": "async programming and concurrency",
+    "11": "architecture and design patterns",
+    "12": "UI design and user experience decisions",
+    "13": "third party integrations and external APIs",
+    "14": "caching strategies"
 }
 
 topic = topics.get(topic_choice, None)
