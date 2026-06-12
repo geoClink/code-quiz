@@ -14,6 +14,19 @@ def load_env():
 
 load_env()
 
+def load_previous_questions(repo_name):
+    asked = []
+    sessions_dir = "sessions"
+    if not os.path.exists(sessions_dir):
+        return asked
+    for filename in os.listdir(sessions_dir):
+        if filename.startswith(repo_name) and filename.endswith(".json"):
+            with open(f"{sessions_dir}/{filename}") as f:
+                data = json.load(f)
+                for q in data.get("questions", []):
+                    asked.append(q["question"])
+    return asked
+
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 
@@ -70,10 +83,17 @@ else:
 
 client = Groq(api_key=GROQ_API_KEY)
 
+previous_questions = load_previous_questions(selected_repo.name)
+
+if previous_questions:
+    history_note = "You have already asked these questions in previous sessions, do not repeat them:\n" + "\n".join(f"- {q}" for q in previous_questions)
+else:
+    history_note = ""
+
 conversation_history = [
     {
         "role": "system",
-        "content": "You are a senior developer quizzing a junior developer on their own code. Ask one conceptual question at a time. Focus on why decisions were made, what a function does, or how a pattern works. Never ask about specific line numbers. Keep questions clear and concise. Never repeat a question you have already asked in this conversation."
+        "content": f"You are a senior developer quizzing a junior developer on their own code. Ask one conceptual question at a time. Focus on why decisions were made, what a function does, or how a pattern works. Never ask about specific line numbers. Keep questions clear and concise. Never repeat a question you have already asked in this conversation. {history_note}"
     }
 ]
 
